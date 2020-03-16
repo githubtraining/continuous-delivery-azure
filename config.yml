@@ -8,8 +8,8 @@ tags:
   - CD
   - Deployment
 template:
-    name: github-actions-continuous-delivery
-    repo: continuous-delivery-template
+    name: github-actions-continuous-delivery-azure
+    repo: continuous-delivery-azure-template
 
 # Repo artifacts
 # 1. (PR) Create a staging workflow
