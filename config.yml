@@ -1,0 +1,328 @@
+# Course information
+title: "GitHub Actions: Continuous Delivery with Azure"
+description: Create two deployment workflows using GitHub Actions and Microsoft Azure.
+tags:
+  - GitHub Actions
+  - Microsoft Azure
+  - Workflows
+  - CD
+  - Deployment
+template:
+    name: github-actions-continuous-delivery
+    repo: continuous-delivery-template
+
+# Repo artifacts
+# 1. (PR) Create a staging workflow
+# 2. (PR) Configure cloud provider
+# 3. (PR) Test the GitHub Actions workflows
+
+# Before
+before:
+
+  # we create a staging label that will be used later to test
+
+- type: createLabel
+  name: stage
+  color: f87000
+- type: createLabel
+  name: spin up environment
+  color: 00f85f
+- type: createLabel
+  name: destroy environment
+  color: c4c4c4
+
+# PART 1: STAGING WORKFLOW 
+
+  # Step 1: Configure a trigger based on labels
+  
+    # Before step: Pull request will be open with overview of workflow file. 
+- type: createPullRequest
+  title: Create a staging workflow
+  body: 01_label-trigger.md
+  head: staging-workflow
+
+      # protected branch
+- type: updateBranchProtection
+  
+steps: 
+
+   # Step 1: User commits the proper trigger
+- title: Configure a trigger based on labels
+  description: Configure the workflow trigger based on an a label being added
+  event: pull_request.synchronize
+  link: '{{ repoUrl }}/pull/1'
+  actions:
+  - type: getFileContents
+    action_id: fileContents
+    filename: '.github/workflows/deploy-staging.yml'
+    required: false
+
+    # We validate that trigger is correct
+  - type: gate
+    every: true
+    gates:
+    - left: '%payload.pull_request.title%'
+      operator: ===
+      right: Create a staging workflow
+    - left: '/on:\s*\n\s*pull_request:\s*\n\s*types:\s*\[\s*labeled\s*\]\s*/gi'
+      operator: test
+      right: '%actions.fileContents%'
+    else:
+    - type: respond
+      with: 0Xe_unexpected.md
+      data:
+        expected: commit the file `.github/workflows/deploy-staging.yml` and a `[labeled]` trigger on the `staging-workflow` branch
+
+  # Step 2: Trigger a job on specific labels
+
+    # We tell the user to write the proper environment in the workflow file
+  - type: respond
+    with: 02_conditional.md
+
+    # event: User commits proper environment in workflow
+- title: Trigger a job on specific labels
+  description: Use a conditional to trigger a job on a specific label
+  event: pull_request.synchronize
+  link: '{{ repoUrl }}/pull/1'
+  actions:
+    - type: getFileContents
+      action_id: fileContents
+      filename: '.github/workflows/deploy-staging.yml'
+      required: false
+
+    # We validate
+    - type: gate
+      left: /\s*if:\s*contains\s*\(\s*github\.event\.pull_request\.labels\.\*\.name,\s*'stage'\)/gi
+      operator: test
+      right: '%actions.fileContents%'
+      else:
+        - type: respond
+          with: 0Xe_unexpected.md
+          data:
+            expected: "the conditional `if: contains(github.event.pull_request.labels.*.name, 'stage')` in the `.github/workflows/deploy-staging.yml` file"
+
+
+  # Step 3: Write the steps for the staging workflow
+      # We tell the user to write the proper steps for the workflow
+    - type: respond
+      with: 03_workflow-steps.md
+
+    # event: commit, user writes the steps for the workflow, using recommended existing GitHub steps
+- title: Set up the environment for your app
+  description: Use the GitHub-created action to deploy your app
+  event: pull_request
+  link: '{{ repoUrl }}/pull/1'
+  actions:
+
+    # We validate
+  #- type: gate
+
+    # We remove branch protections
+  - type: removeBranchProtection
+
+  # Step 4: Merge the staging workflow
+    # We tell the user to merge
+  - type: respond
+    with: 04_merge-staging.md
+
+    # event: merge
+- title: Merge the staging workflow
+  description: Merge this staging workflow pull request
+  event: pull_request.closed
+  link: '{{ repoUrl }}/pull/1'
+  actions:
+
+    # we make sure it's merged
+  - type: gate
+    every: true
+    gates:
+    - left: '%payload.action%'
+      operator: ===
+      right: closed
+    - left: '%payload.pull_request.merged%'
+
+    # we reprotect master for the next PR
+  - type: updateBranchProtection
+
+  - type: createPullRequest
+    title: Configure cloud provider
+    body: 05_configure-azure.md
+    head: azure-configuration
+    action_id: nextPR
+
+    # we point user to new PR
+  - type: respond
+    with: 0X_next-steps.md
+    data:
+      url: '%actions.nextPR.data.html_url%'
+
+    # event: responding with a comment
+
+- title: Configure the app's resources
+  description: Use your workflow file to configure your cloud resources
+  event: pull_request.synchronize
+  link: '{{ repoUrl }}/pull/2'
+  actions:
+    - type: getFileContents
+      action_id: fileContents
+      filename: '.github/workflows/spinup-destroy.yml'
+      required: false
+    - type: gate
+      left: '/AZURE_WEBAPP_NAME:\s*%user.login%/gi'
+      operator: test
+      right: '%actions.fileContents%'
+      else: 
+      - type: respond
+        with: 0Xe_unexpected.md
+        data:
+          expected: commit the file `.github/workflows/spinup-destroy.yml` and set the variable `AZURE_WEBAPP_NAME` to start with your GitHub username
+    # we formally request their approval
+    - type: requestReviewFromRegistrant
+      pullRequest: Configure cloud provider
+    
+    # We explain what the purpose of these templates are, and ask the user to approve 
+    - type: respond
+      with: 07_approve.md
+
+
+  # event: approval
+
+- title: Approve pull request
+  description: Approve pull request adding the necessary configuration files
+  event: pull_request_review
+  link: '{{ repoUrl }}/pull/2'
+  actions:   
+
+  # we make sure it's approved
+  - type: gate
+    left: '%payload.review.state%'
+    operator: ===
+    right: approved
+    else:
+    - type: respond
+      with: 07_approve-pr.md
+    
+  # we merge
+  - type: gate
+    left: '%payload.pull_request.labels%'
+    operator: includes
+    right: "spin up environment"
+    else:
+      - type: respond
+        with: 0Xe_unexpected.md
+        data:
+          expected: "apply the 'spin up environment' label"
+  - type: mergeBranch
+    head: azure-configuration
+    base: master
+
+  # merge master into staging-test so staging-test has the appropriate updates
+  - type: mergeBranch
+    head: master
+    base: staging-test
+
+  # we must prepare next pr now so we can point to it. We ask the user to test this action by adding a label
+  - type: createPullRequest
+    title: Test the GitHub Actions workflows
+    body: 08_test.md
+    head: staging-test
+    action_id: testPR
+
+  # we point user to next pull request
+  - type: respond
+    with: 0X_next-steps.md
+    data:
+      url: '%actions.testPR.data.html_url%'
+
+# PART 3: TEST STAGING WORKFLOW 
+
+# Step 8: Test the GitHub Actions workflows
+
+  # event: label added, and deployment successful
+
+- title: Test the GitHub Actions workflows
+  description: Test the new action to deploy labeled pull requests to staging
+  event: pull_request.labeled
+  link: '{{ repoUrl }}/pull/3'
+  actions:   
+  
+  # We need to prepare next PR for them where they write the prod deployment workflow
+  - type: createPullRequest
+    title: Production deployment workflow
+    body: 09_merge-trigger.md
+    head: production-deployment-workflow
+    action_id: prodPR
+
+  # We respond and tell them what to expect
+  - type: respond
+    with: 08_deployment.md
+    data:
+      url: '%actions.prodPR.data.html_url%'
+
+# PART 4: PRODUCTION DEPLOYMENT WORKFLOW
+
+# Step 9: Write the production deployment trigger
+
+  # event: User commits the proper trigger
+
+- title: Write the production deployment trigger
+  description: Write the production deployment trigger in the new workflow
+  event: pull_request
+  link: '{{ repoUrl }}/pull/3'
+  actions: 
+
+  # We validate
+  #- type: gate
+
+
+  # We tell the user to write the proper environment
+  - type: respond
+    with: 10_deploy-prod.md
+
+  # event: commit, user writes the steps for the workflow, using recommended existing GitHub steps
+  
+- title: Create the Docker image and push it to GitHub Packages
+  description: Add a step to the workflow for building and pushing a Docker image to GitHub Packages.
+  event: pull_request
+  link: '{{ repoUrl }}/pull/3'
+  actions:
+
+  # We validate
+  # type: gate
+
+  # We approve
+# PART 5: TEST WORKFLOWS
+
+# Step 12: Merge this pull request and test the production deployment workflow
+
+# We remove branch protections 
+  - type: removeBranchProtection 
+
+# We tell the user to merge, and that their merge will bring the action into `master`, and will also create a deployment into production
+  - type: respond
+    with: 12_merge.md
+
+# event: merge
+
+- title: Merge the production workflow
+  description: Merge this pull request and test the production deployment workflow
+  event: pull_request.closed
+  link: '{{ repoUrl }}/pull/3'
+  actions:
+  
+  # check that its merged
+  - type: gate
+    left: '%payload.pull_request.merged%'
+  
+  - type: respond
+    with: 12_clean-up.md
+
+- title: Clean up your environment
+  description: Destroy any running resources so you don't incur charges.
+  event: pull_request.labeled
+  link: '{{ repoUrl }}/issues/4'
+  actions:
+
+# final response: congratulations
+  - type: respond
+    with: 13_congratulations.md
