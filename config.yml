@@ -15,6 +15,7 @@ template:
 # 1. (PR) Create a staging workflow
 # 2. (PR) Configure cloud provider
 # 3. (PR) Test the GitHub Actions workflows
+# 4. (PR) Production deployment workflow
 
 # Before
 before:
