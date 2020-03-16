@@ -205,8 +205,8 @@ steps:
   # we merge
   - type: gate
     left: '%payload.pull_request.labels%'
-    operator: test
-    right: "label:spin up environment"
+    operator: includes
+    right: "name:spin up environment"
     else:
       - type: respond
         with: 0Xe_unexpected.md
