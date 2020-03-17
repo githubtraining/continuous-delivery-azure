@@ -2,7 +2,7 @@
 
 <h1 align="center">Course: GitHub Actions: Continuous Delivery with Azure</h1>
 
-This repository powers the Learning Lab course [_GitHub Actions: Continuous Delivery with Azure_](https://lab.github.com/githubtraining/github-actions:-continuous-delivery-and-azure). 
+This repository powers the Learning Lab course [_GitHub Actions: Continuous Delivery with Azure_](https://lab.github.com/githubtraining/github-actions:-continuous-delivery-with-azure). 
 
 Every Learning Lab course is made up of:
 - a [course repository](https://github.com/githubtraining/continuous-delivery-azure), and
