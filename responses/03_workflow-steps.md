@@ -40,13 +40,13 @@ The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining
       }
     ]
     ```
-1. In your terminal, run the command below. **Note: if you are using PowerShell, you may need to leave out the `\` backslash from each line. 
+1. In your terminal, run the command below. **Note: The `\` character works as a linebreak on Unix based systems.  If you are on a Windows based system the `\` character will cause this command to fail.  Place this command on a single line if you are using Windows. 
     ```shell
     az ad sp create-for-rbac --name "GitHub-Actions" --role contributor \
                               --scopes /subscriptions/{subscription-id} \
                               --sdk-auth
                               
-    # Replace {subscription-id} with the same id stored in AZURE_SUBSCRIPTION_ID. Leave out the backslash (\) on Windows.
+    # Replace {subscription-id} with the same id stored in AZURE_SUBSCRIPTION_ID.
     ```   
 1. Copy the entire contents of the command's response, we'll call this `AZURE_CREDENTIALS`. Here's an example of what it looks like:
     ```shell
