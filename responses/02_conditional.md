@@ -22,7 +22,7 @@ Let's put all this together to run our job only when a labeled named "stage" is 
 1. Edit the contents of the file to add a block for environment variables before your jobs, as follows.
     ```yaml
     env:
-      DOCKER_IMAGE_NAME: {{user.login}}-tic-tac-toe
+      DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt
       IMAGE_REGISTRY_URL: docker.pkg.github.com
       #################################################
       ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
@@ -44,7 +44,7 @@ on:
     types: [labeled]
 
 env:
-  DOCKER_IMAGE_NAME: {{user.login}}-tic-tac-toe
+  DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt
   IMAGE_REGISTRY_URL: docker.pkg.github.com
   #################################################
   ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###

@@ -26,7 +26,7 @@ on:
       - master
 
 env:
-  DOCKER_IMAGE_NAME: {{user.login}}-tic-tac-toe # Must not exist as a package associated with a different repo!
+  DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt # Must not exist as a package associated with a different repo!
   IMAGE_REGISTRY_URL: docker.pkg.github.com
   #################################################
   ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
