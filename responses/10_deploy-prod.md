@@ -33,7 +33,7 @@ env:
   #################################################
   #################################################
   ### REPLACE USERNAME WITH GH USERNAME         ###
-  AZURE_WEBAPP_NAME: hectorsector-ttt-app
+  AZURE_WEBAPP_NAME: {{user.login}}-ttt-app
   #################################################
 
 jobs:

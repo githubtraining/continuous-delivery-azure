@@ -35,10 +35,19 @@ In a GitHub Actions workflow, the `on` step defines what causes the workflow to 
 ### :keyboard: Activity: Configure the workflow trigger based on a label being added
 
 1. Edit the `deploy-staging.yml` file on this branch, or [use this quick link]({{ repoUrl }}/edit/staging-workflow/.github/CHANGETHIS/deploy-staging.yml?) _(We recommend opening the quick link in another tab)_
-2. Change the name of the directory `CHANGETHIS` to `workflows`, so the title of this file with the path is `.github/workflows/deploy-staging.yml`
+2. Change the name of the directory `CHANGETHIS` to `workflows`, so the title of this file with the path is `.github/workflows/deploy-staging.yml`. If you're working on the GitHub.com user interface, see the suggestion below for how to rename.
 3. Edit the contents of this file to trigger a job called `build` on a label
 
-Your result should look like this:
+<details><summary>Changing the name of a directory</summary>
+
+If you're working locally, rename your file or drag-and-drop the file into the proper directory as you'd normally do. If you're working on GitHub.com, you can change the name of a directory by changing its filename and using the Backspace key until you reach the directory, as follows:
+1. In the file name field, click in front of the first character in the file name
+1. Press <kbd>Backspace</kbd> or <kbd>Delete</kbd> on your keyboard until you see the path you want to keep. You can continue to press <kbd>Backspace</kbd> even if the text box with the file name is empty. 
+1. Enter the new name for your directory.
+1. Enter `/` to let GitHub know this should be a new directory.
+</details>
+
+Your resulting file should be in `.github/workflows/deploy-staging.yml` and it should look like this:
 
 ```yml
 name: Stage the app
