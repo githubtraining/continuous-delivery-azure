@@ -26,14 +26,14 @@ on:
       - master
 
 env:
-  DOCKER_IMAGE_NAME: hectorsector-tic-tac-toe # Must not exist as a package associated with a different repo!
+  DOCKER_IMAGE_NAME: {{user.login}}-tic-tac-toe # Must not exist as a package associated with a different repo!
   IMAGE_REGISTRY_URL: docker.pkg.github.com
   #################################################
   ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
   #################################################
   #################################################
   ### REPLACE USERNAME WITH GH USERNAME         ###
-  AZURE_WEBAPP_NAME: hectorsector-ttt-app
+  AZURE_WEBAPP_NAME: {{user.login}}-ttt-app
   #################################################
 
 jobs:
