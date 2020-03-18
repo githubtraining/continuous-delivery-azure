@@ -321,7 +321,7 @@ steps:
 - title: Clean up your environment
   description: Destroy any running resources so you don't incur charges.
   event: pull_request.labeled
-  link: '{{ repoUrl }}/issues/4'
+  link: '{{ repoUrl }}/pull/4'
   actions:
 
 # final response: congratulations
