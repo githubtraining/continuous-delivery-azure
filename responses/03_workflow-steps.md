@@ -14,7 +14,7 @@ We won't be going into detail on the steps of this workflow, but it would be a g
 The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining/github-actions:-continuous-integration) also teaches how to use most of these actions in details.
 
 ### :keyboard: Activity: Set up the environment for your app
-1. In a new tab, [create an Azure account](https://azure.microsoft.com/en-us/free/) if you don't already have one.
+1. In a new tab, [create an Azure account](https://azure.microsoft.com/en-us/free/) if you don't already have one. If your Azure account is created through work, you may encounter issues accessing the necessary resources -- we recommend creating a new account for personal use and for this course. 
     > Note: You may need a credit card to create an Azure account. If you're a student, you may also be able to take advantage of the [Student Developer Pack](https://education.github.com/pack) for access to Azure. If you'd like to continue with the course without an Azure account, Learning Lab will still respond, but none of the deployments will work.
 1. Create a [new subscription](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription) in the Azure Portal. 
     > Note: you subscription must be configured "Pay as you go" which will require you to enter billing information. This course will only use a few minutes from your free plan, but Azure requires the billing information. 
@@ -40,7 +40,7 @@ The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining
       }
     ]
     ```
-1. In your terminal, run the command below. **Note: The `\` character works as a linebreak on Unix based systems.  If you are on a Windows based system the `\` character will cause this command to fail.  Place this command on a single line if you are using Windows.**
+1. In your terminal, run the command below. **Note: The `\` character works as a line break on Unix based systems.  If you are on a Windows based system the `\` character will cause this command to fail.  Place this command on a single line if you are using Windows.**
     ```shell
     az ad sp create-for-rbac --name "GitHub-Actions" --role contributor \
                               --scopes /subscriptions/{subscription-id} \
