@@ -47,7 +47,7 @@ If you're working locally, rename your file or drag-and-drop the file into the p
 1. Enter `/` to let GitHub know this should be a new directory.
 </details>
 
-Your result should look like this:
+Your resulting file should be in `.github/workflows/deploy-staging.yml` and it should look like this:
 
 ```yml
 name: Stage the app
