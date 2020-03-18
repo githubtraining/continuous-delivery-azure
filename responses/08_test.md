@@ -10,3 +10,7 @@ In this pull request, there's a small change to the game. Once you add the label
 
 1. On the right hand side, click **Labels** or the gear next to it
 2. Select the label titled **stage**
+
+---
+
+I'll respond when you apply a label to this pull request.

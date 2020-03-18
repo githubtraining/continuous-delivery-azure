@@ -8,3 +8,7 @@ Nice job, you've done it!
 
 1. Merge this pull request
 2. Delete the branch
+
+---
+
+I'll respond when you merge this pull request.

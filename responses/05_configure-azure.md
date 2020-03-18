@@ -97,4 +97,6 @@ jobs:
           {% raw %}az group delete --name ${{env.AZURE_RESOURCE_GROUP}} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}} --yes{% endraw %}
 ```
 
+---
+
 I'll respond when I detect a commit on this branch.

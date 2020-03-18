@@ -12,4 +12,6 @@ Throughout the course you've spun up resources that, if left unattended, could i
 
 1. Apply the **destroy environment** label to this pull request.
 
+---
+
 I'll respond when you apply a label to this pull request. 
