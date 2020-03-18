@@ -1,1 +1,1 @@
-Uh oh - you reviewed this pull request, but you didn't approve it. Please approve it. 
+Uh oh - I was looking for you to review the pull request titled **Configure cloud provider**. 

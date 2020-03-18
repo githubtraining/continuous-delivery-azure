@@ -86,6 +86,16 @@ steps:
   event: pull_request.synchronize
   link: '{{ repoUrl }}/pull/1'
   actions:
+    - type: gate
+      left: '%payload.pull_request.title%'
+      operator: ===
+      right: Create a staging workflow
+      else:
+      - type: respond
+        with: 0Xe_unexpected.md
+        data:
+          expected: commit to a pull request titled **Create a staging workflow**
+
     - type: getFileContents
       action_id: fileContents
       filename: '.github/workflows/deploy-staging.yml'
@@ -115,8 +125,15 @@ steps:
   link: '{{ repoUrl }}/pull/1'
   actions:
 
-    # We validate
-  #- type: gate
+  - type: gate
+    left: '%payload.pull_request.title%'
+    operator: ===
+    right: Create a staging workflow
+    else:
+    - type: respond
+      with: 0Xe_unexpected.md
+      data:
+        expected: commit to a pull request titled **Create a staging workflow**
 
     # We remove branch protections
   - type: removeBranchProtection
@@ -137,10 +154,19 @@ steps:
   - type: gate
     every: true
     gates:
+    - left: '%payload.pull_request.title%'
+      operator: ===
+      right: Create a staging workflow
     - left: '%payload.action%'
       operator: ===
       right: closed
     - left: '%payload.pull_request.merged%'
+    else:
+    - type: respond
+      with: 0Xe_unexpected.md
+      data:
+        expected: merge the pull request titled **Create a staging workflow**
+    
 
     # we reprotect master for the next PR
   - type: updateBranchProtection
@@ -164,6 +190,16 @@ steps:
   event: pull_request.synchronize
   link: '{{ repoUrl }}/pull/2'
   actions:
+    - type: gate
+      left: '%payload.pull_request.title%'
+      operator: ===
+      right: Configure cloud provider
+      else:
+      - type: respond
+        with: 0Xe_unexpected.md
+        data:
+          expected: commit to a pull request titled **Configure cloud provider**
+
     - type: getFileContents
       action_id: fileContents
       filename: '.github/workflows/spinup-destroy.yml'
@@ -196,9 +232,14 @@ steps:
 
   # we make sure it's approved
   - type: gate
-    left: '%payload.review.state%'
-    operator: ===
-    right: approved
+    every: true
+    gates:
+    - left: '%payload.review.state%'
+      operator: ===
+      right: approved
+    - left: '%payload.pull_request.title%'
+      operator: ===
+      right: Configure cloud provider
     else:
     - type: respond
       with: 07_approve-pr.md
@@ -246,7 +287,22 @@ steps:
   event: pull_request.labeled
   link: '{{ repoUrl }}/pull/3'
   actions:   
-  
+
+  - type: gate
+    every: true
+    gates:
+    - left: '%payload.pull_request.labels%'
+      operator: includes
+      right: "name:stage"
+    - left: '%payload.pull_request.title%'
+      operator: ===
+      right: Test the GitHub Actions workflows
+    else:
+      - type: respond
+        with: 0Xe_unexpected.md
+        data:
+          expected: "apply the 'stage' label to the pull request titled **Test the GitHub Actions workflows**"
+
   # We need to prepare next PR for them where they write the prod deployment workflow
   - type: createPullRequest
     title: Production deployment workflow
@@ -273,7 +329,15 @@ steps:
   actions: 
 
   # We validate
-  #- type: gate
+  - type: gate
+    left: '%payload.pull_request.title%'
+    operator: ===
+    right: Production deployment workflow
+    else:
+    - type: respond
+      with: 0Xe_unexpected.md
+      data:
+        expected: commit to a pull request titled **Production deployment workflow**
 
 
   # We tell the user to write the proper environment
@@ -289,7 +353,15 @@ steps:
   actions:
 
   # We validate
-  # type: gate
+  - type: gate
+    left: '%payload.pull_request.title%'
+    operator: ===
+    right: Production deployment workflow
+    else:
+    - type: respond
+      with: 0Xe_unexpected.md
+      data:
+        expected: commit to a pull request titled **Production deployment workflow**
 
   # We approve
 # PART 5: TEST WORKFLOWS
@@ -313,7 +385,17 @@ steps:
   
   # check that its merged
   - type: gate
-    left: '%payload.pull_request.merged%'
+    every: true
+    gates:
+    - left: '%payload.pull_request.title%'
+      operator: ===
+      right: Production deployment workflow
+    - left: '%payload.pull_request.merged%'
+    else:
+    - type: respond
+      with: 0Xe_unexpected.md
+      data:
+        expected: commit to a pull request titled **Production deployment workflow**
   
   - type: respond
     with: 12_clean-up.md
@@ -323,6 +405,21 @@ steps:
   event: pull_request.labeled
   link: '{{ repoUrl }}/pull/4'
   actions:
+
+  - type: gate
+    every: true
+    gates:
+    - left: '%payload.pull_request.labels%'
+      operator: includes
+      right: "name:destroy environment"
+    - left: '%payload.pull_request.title%'
+      operator: ===
+      right: Production deployment workflow
+    else:
+      - type: respond
+        with: 0Xe_unexpected.md
+        data:
+          expected: "apply the 'destroy environment' label to the pull request titled **Production deployment workflow**"
 
 # final response: congratulations
   - type: respond
