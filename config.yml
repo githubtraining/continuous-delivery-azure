@@ -120,7 +120,7 @@ steps:
 
     # event: commit, user writes the steps for the workflow, using recommended existing GitHub steps
 - title: Set up the environment for your app
-  description: Use the GitHub-created action to deploy your app
+  description: Store your credentials in GitHub secrets and finish setting up your workflow
   event: pull_request
   link: '{{ repoUrl }}/pull/1'
   actions:
@@ -185,7 +185,7 @@ steps:
 
     # event: responding with a comment
 
-- title: Configure the app's resources
+- title: Spin up, configure, and destroy Azure resources
   description: Use your workflow file to configure your cloud resources
   event: pull_request.synchronize
   link: '{{ repoUrl }}/pull/2'
@@ -224,7 +224,7 @@ steps:
 
   # event: approval
 
-- title: Approve pull request
+- title: Configuring your Azure environment
   description: Approve pull request adding the necessary configuration files
   event: pull_request_review
   link: '{{ repoUrl }}/pull/2'
@@ -323,9 +323,9 @@ steps:
   # event: User commits the proper trigger
 
 - title: Write the production deployment trigger
-  description: Write the production deployment trigger in the new workflow
+  description: Write the production deployment trigger on merge to master
   event: pull_request
-  link: '{{ repoUrl }}/pull/3'
+  link: '{{ repoUrl }}/pull/4'
   actions: 
 
   # We validate
@@ -346,10 +346,10 @@ steps:
 
   # event: commit, user writes the steps for the workflow, using recommended existing GitHub steps
   
-- title: Create the Docker image and push it to GitHub Packages
-  description: Add a step to the workflow for building and pushing a Docker image to GitHub Packages.
+- title: Complete the deployment to production workflow
+  description: Add jobs to a production deployment workflow
   event: pull_request
-  link: '{{ repoUrl }}/pull/3'
+  link: '{{ repoUrl }}/pull/4'
   actions:
 
   # We validate
@@ -378,9 +378,9 @@ steps:
 # event: merge
 
 - title: Merge the production workflow
-  description: Merge this pull request and test the production deployment workflow
+  description: Merge the production deployment pull request
   event: pull_request.closed
-  link: '{{ repoUrl }}/pull/3'
+  link: '{{ repoUrl }}/pull/4'
   actions:
   
   # check that its merged
