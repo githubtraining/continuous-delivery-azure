@@ -77,7 +77,7 @@ on:
     types: [labeled]
 
 env:
-  DOCKER_IMAGE_NAME: {{user.login}}-tic-tac-toe
+  DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt
   IMAGE_REGISTRY_URL: docker.pkg.github.com
   #################################################
   ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
