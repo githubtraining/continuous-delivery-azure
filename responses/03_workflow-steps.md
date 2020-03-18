@@ -40,7 +40,7 @@ The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining
       }
     ]
     ```
-1. In your terminal, run the command below. **Note: The `\` character works as a linebreak on Unix based systems.  If you are on a Windows based system the `\` character will cause this command to fail.  Place this command on a single line if you are using Windows. 
+1. In your terminal, run the command below. **Note: The `\` character works as a linebreak on Unix based systems.  If you are on a Windows based system the `\` character will cause this command to fail.  Place this command on a single line if you are using Windows.**
     ```shell
     az ad sp create-for-rbac --name "GitHub-Actions" --role contributor \
                               --scopes /subscriptions/{subscription-id} \
