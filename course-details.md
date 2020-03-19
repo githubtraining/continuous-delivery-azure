@@ -35,6 +35,15 @@ Before you start, you should be familiar with GitHub and Continuous Integration.
 
 ## Projects used
 This course makes use of the following technologies:
+- [Azure/actions](https://github.com/Azure/actions): Automate your GitHub workflows using Azure Actions
+- [Azure/login](https://github.com/Azure/login): Connect to Azure
+- [Azure/docker-login](https://github.com/Azure/docker-login): Enable GitHub developers to deploy to Kubernetes service using GitHub Actions
+- [Azure/webapps-container-deploy](https://github.com/Azure/webapps-container-deploy): Enable GitHub developers to deploy to Azure WebApp for containers using GitHub Actions
+- [actions/checkout](https://github.com/actions/checkout): Action for checking out a repo
+- [actions/upload-artifact](https://github.com/actions/upload-artifact): Upload artifacts from GitHub's built-in artifact storage.
+- [actions/download-artifact](https://github.com/actions/download-artifact): Download artifacts from GitHub's built-in artifact storage.
+- [mattdavis0351/actions/docker-gpr](https://github.com/mattdavis0351/actions/tree/master/docker-gpr): A GitHub Action to upload Docker images to the GitHub Package Registry.
+
 
 ## Audience
 

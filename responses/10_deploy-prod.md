@@ -10,7 +10,7 @@ In our case, we can match our production environment to be exactly like our stag
 
 ## Step 9: Complete the deployment to production workflow
 
-### :keyboard: Commit the steps to the production workflow that allow you to deploy on merge to master
+### :keyboard: Activity: Add jobs to a production deployment workflow
 
 1. Edit the `deploy-prod.yml` file on this branch, or [use this quick link]({{ repoUrl }}/edit/production-deployment-workflow/.github/workflows/deploy-prod.yml?) _(We recommend opening the quick link in another tab)_
 2. Add a `build` and `deploy` job to the workflow
@@ -99,3 +99,7 @@ jobs:
         run: |
           az logout
 ```
+
+---
+
+I'll respond when you push a commit on this branch.

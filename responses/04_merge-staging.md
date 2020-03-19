@@ -10,3 +10,7 @@ It won't be "working" yet, because our next step is to work on the configuration
 
 1. Merge this pull request
 2. Delete the `staging-workflow` branch
+
+---
+
+I'll respond when you merge this pull request.

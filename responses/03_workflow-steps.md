@@ -2,7 +2,7 @@
 
 So far, the workflow knows what the trigger is and what environment to run in. But, what exactly is supposed to run? The "steps" section of this workflow specifies actions and scripts to be run in the Ubuntu environment when new labels are added.
 
-## Step 3: Write the steps for the staging workflow
+## Step 3: Set up the environment for your app
 
 We won't be going into detail on the steps of this workflow, but it would be a good idea to become familiar with the actions we're using. They are:
 
@@ -13,7 +13,7 @@ We won't be going into detail on the steps of this workflow, but it would be a g
 
 The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining/github-actions:-continuous-integration) also teaches how to use most of these actions in details.
 
-### :keyboard: Activity: Set up the environment for your app
+### :keyboard: Activity: Store your credentials in GitHub secrets and finish setting up your workflow
 1. In a new tab, [create an Azure account](https://azure.microsoft.com/en-us/free/) if you don't already have one. If your Azure account is created through work, you may encounter issues accessing the necessary resources -- we recommend creating a new account for personal use and for this course. 
     > Note: You may need a credit card to create an Azure account. If you're a student, you may also be able to take advantage of the [Student Developer Pack](https://education.github.com/pack) for access to Azure. If you'd like to continue with the course without an Azure account, Learning Lab will still respond, but none of the deployments will work.
 1. Create a [new subscription](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription) in the Azure Portal. 
@@ -150,3 +150,7 @@ jobs:
         run: |
           az logout
 ```
+
+---
+
+I'll respond when you push a commit on this branch.
