@@ -9,7 +9,7 @@ We won't be going into detail on the steps of this workflow, but it would be a g
 - [`actions/checkout`](https://github.com/actions/checkout)
 - [`actions/upload-artifact`](https://github.com/actions/upload-artifact)
 - [`actions/download-artifact`](https://github.com/actions/download-artifact)
-- [`github/deploy-nodejs`](https://github.com/github/deploy-nodejs)
+- [`azure/webapps-container-deploy`](https://github.com/Azure/webapps-container-deploy)
 
 The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining/github-actions:-continuous-integration) also teaches how to use most of these actions in details.
 
