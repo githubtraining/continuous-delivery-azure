@@ -141,7 +141,7 @@ jobs:
           password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 
       - name: Deploy web app container
-        uses: azure/webapps-container-deploy@v1
+        uses: azure/webapps-deploy@v2
         with:
           app-name: {% raw %}${{env.AZURE_WEBAPP_NAME}}{% endraw %}
           images: {% raw %}${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.DOCKER_IMAGE_NAME}}:${{ github.sha }}{% endraw %}
