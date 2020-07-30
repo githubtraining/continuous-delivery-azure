@@ -18,7 +18,6 @@ Let's create a new workflow that deals specifically with commits to master and h
 1. Add the same environment block as before:
     ```yaml
     env:
-      PACKAGES_TOKEN: {% raw %}${{secrets.PACKAGES_TOKEN}}{% endraw %}
       AZURE_RESOURCE_GROUP: cd-with-actions
       AZURE_APP_PLAN: actions-ttt-deployment
       AZURE_LOCATION: '"Central US"'
