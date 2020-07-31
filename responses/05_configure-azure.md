@@ -16,7 +16,7 @@ Through the power of GitHub Actions, we can create, configure, and destroy these
 ### :keyboard: Activity: Use your workflow file to configure your cloud resources
 
 1. Edit the `.github/CHANGETHIS/spinup-destroy.yml` file on this branch, or [use this quick link]({{ repoUrl }}/edit/azure-configuration/.github/CHANGETHIS/spinup-destroy.yml?). _(We recommend opening the quick link in another tab.)_
-1. Rename the files to `.github/workflows/spinup-destroy.yml`
+1. Rename the file to `.github/workflows/spinup-destroy.yml`
 1. Change the value of the `AZURE_WEBAPP_NAME:` to `{{ user.login }}-ttt-app`
 1. Commit your changes.
 
