@@ -7,7 +7,7 @@ We'll learn how to create a workflow that enables Continuous Delivery. You'll:
 Before you start, you should be familiar with GitHub and Continuous Integration. If you aren't sure where to start, you may want to check out these two Learning Lab courses:
 
 - [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github)
-- [Continuous Integration with GitHub Actions](https://lab.github.com/githubtraining/set-up-continuous-integration-with-github-actions)
+- [Continuous Integration with GitHub Actions](https://lab.github.com/githubtraining/github-actions:-continuous-integration/)
 
 ### What is Continuous Delivery?
 

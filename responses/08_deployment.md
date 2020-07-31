@@ -4,4 +4,4 @@ The deployment may take a few moments but you've done the right thing. Once the 
 
 You can wait for the deployment, or move on to the next steps in the [next pull request]({{ url }}). 
 
-If you'd like to come back and merge this once their other workflow is done, just approve this pull request and merge. :tada:
+If you'd like to come back and merge this once the other workflow is done, just approve this pull request and merge. :tada:
