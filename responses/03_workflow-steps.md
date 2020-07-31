@@ -59,10 +59,10 @@ The course [_Using GitHub Actions for CI_](https://lab.github.com/githubtraining
     } 
     ```
 1. Back on GitHub, click on this repository's **[Secrets]({{ repoUrl }}/settings/secrets)** in the Settings tab.
-1. Click **Add a new secret**
+1. Click **New secret**
 1. Name your new secret **AZURE_SUBSCRIPTION_ID** and paste the value from the `id:` field in the first command.
 1. Click **Add secret**.
-1. Click **Add a new secret** again.
+1. Click **New secret** again.
 1. Name the second secret **AZURE_CREDENTIALS** and paste the entire contents from the second terminal command you entered.
 1. Click **Add secret**
 1. Back in this pull request, edit the `.github/workflows/deploy-staging.yml` file to use some new actions, or [use this quick link]({{ repoUrl }}/edit/staging-workflow/.github/workflows/deploy-staging.yml?) _(We recommend opening the quick link in another tab)_
