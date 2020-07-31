@@ -31,7 +31,7 @@ I've requested your approval on this pull request. Once you approve this, I will
 
 1. Apply the "spin up environment" label to this pull request
 1. Wait for the GitHub Actions workflow to run and spin up your Azure environment. You can follow along in the Actions tab or in the pull request merge box.
-1. Once it workflow succeeds, approve this pull request
+1. Once the workflow succeeds, approve this pull request
 
 ---
 
