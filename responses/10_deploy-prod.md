@@ -15,7 +15,7 @@ In our case, we can match our production environment to be exactly like our stag
 1. Edit the `deploy-prod.yml` file on this branch, or [use this quick link]({{ repoUrl }}/edit/production-deployment-workflow/.github/workflows/deploy-prod.yml?) _(We recommend opening the quick link in another tab)_
 2. Add a `build` and `deploy` job to the workflow
 
-It should look like the file below when you are finished. Note that not much has changed from our staging workflow, except for our trigger.
+It should look like the file below when you are finished. Note that not much has changed from our staging workflow, except for our trigger, and that we won't be filtering by labels.
 
 ```yml
 name: Production deployment
@@ -38,8 +38,6 @@ env:
 
 jobs:
   build:
-    if: contains(github.event.pull_request.labels.*.name, 'stage')
-    
     runs-on: ubuntu-latest
 
     steps:
