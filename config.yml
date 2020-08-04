@@ -421,6 +421,6 @@ steps:
         data:
           expected: "apply the 'destroy environment' label to the pull request titled **Production deployment workflow**"
 
-# final response: congratulations
+# final response: congratulations!
   - type: respond
     with: 13_congratulations.md
