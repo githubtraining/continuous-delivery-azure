@@ -19,11 +19,11 @@ First, we'll set up a personal access token (PAT) that can be used with GitHub P
 
 1. Navigate to your [**Personal Access Tokens**]({{ GITHUB_URL }}/settings/tokens).
 2. Click on **Generate new token**.
-3. Select the following scopes:
+3. Enter a note to (like "Packages token for Learning Lab") remind you of what this token is for, then select the following scopes. Note that the user interface may automatically select other scopes as a result, keep them selected.
     - `write:packages`
     - `read:packages`
     - `delete:packages`
-4. Click **Generate token** and store the token generated in a safe place. 
+4. Click **Generate token** and store the newly generated token in a safe place.
 5. Back on this repository, access the repository's **[Secrets]({{ repoUrl }}/settings/secrets)** in the Settings tab.
 6. Click **New secret**
 7. Name your new secret **PACKAGE_PAT** and paste the value of your newly created token.
