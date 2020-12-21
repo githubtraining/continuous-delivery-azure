@@ -1,4 +1,4 @@
-Great! The syntax you used tells GitHub Actions to only run that workflow when a commit is made to the master branch. 
+Great! The syntax you used tells GitHub Actions to only run that workflow when a commit is made to the main branch. 
 
 # Deploying to production
 
@@ -23,7 +23,7 @@ name: Production deployment
 on: 
   push:
     branches:
-      - master
+      - main
 
 env:
   DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt # Must not exist as a package associated with a different repo!
@@ -46,7 +46,7 @@ jobs:
         run: |
           npm install
           npm run build
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@main
         with:
           name: webpack artifacts
           path: public/
@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Download built artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@main
         with:
           name: webpack artifacts
           path: public
