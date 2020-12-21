@@ -99,7 +99,7 @@ jobs:
         run: |
           npm install
           npm run build
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@main
         with:
           name: webpack artifacts
           path: public/
@@ -113,7 +113,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Download built artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@main
         with:
           name: webpack artifacts
           path: public
