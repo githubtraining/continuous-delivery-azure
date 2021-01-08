@@ -15,10 +15,23 @@ Through the power of GitHub Actions, we can create, configure, and destroy these
 
 ### :keyboard: Activity: Use your workflow file to configure your cloud resources
 
-1. Edit the `.github/CHANGETHIS/spinup-destroy.yml` file on this branch, or [use this quick link]({{ repoUrl }}/edit/azure-configuration/.github/CHANGETHIS/spinup-destroy.yml?). _(We recommend opening the quick link in another tab.)_
-1. Rename the file to `.github/workflows/spinup-destroy.yml`
-1. Change the value of the `AZURE_WEBAPP_NAME:` to `{{ user.login }}-ttt-app`
-1. Commit your changes.
+First, we'll set up a personal access token (PAT) that can be used with GitHub Packages. Then, we'll create a GitHub Actions workflow that automates the set up of resources in Azure, including the retrieval of a Docker image from Github Packages.
+
+1. Navigate to your [**Personal Access Tokens**]({{ GITHUB_URL }}/settings/tokens).
+2. Click on **Generate new token**.
+3. Enter a note (like "Packages token for Learning Lab") to remind you of what this token is for, then select the following scopes. Note that the user interface may automatically select other scopes as a result, keep them selected.
+    - `write:packages`
+    - `read:packages`
+    - `delete:packages`
+4. Click **Generate token** and store the newly generated token in a safe place.
+5. Back on this repository, access the repository's **[Secrets]({{ repoUrl }}/settings/secrets)** in the Settings tab.
+6. Click **New secret**
+7. Name your new secret **PACKAGE_PAT** and paste the value of your newly created token.
+8. Click **Add secret**.
+9.  Edit the `.github/CHANGETHIS/spinup-destroy.yml` file on this branch, or [use this quick link]({{ repoUrl }}/edit/azure-configuration/.github/CHANGETHIS/spinup-destroy.yml?). _(We recommend opening the quick link in another tab.)_
+10. Rename the file to `.github/workflows/spinup-destroy.yml`
+11. Change the value of the `AZURE_WEBAPP_NAME:` to `{{ user.login }}-ttt-app`
+12. Commit your changes.
 
 The file should look like this:
 
@@ -74,7 +87,7 @@ jobs:
       - name: Configure webapp to use GitHub Packages
         if: success()
         run: |
-          {% raw %}az webapp config container set --docker-custom-image-name nginx --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}{% endraw %}
+          {% raw %}az webapp config container set --docker-custom-image-name nginx --docker-registry-server-password ${{secrets.PACKAGE_PAT}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}{% endraw %}
 
   destroy-azure-resources:
     runs-on: ubuntu-latest
