@@ -18,9 +18,8 @@ Let's create a new workflow that deals specifically with commits to main and han
 1. Add the same environment block as before:
     ```yaml
     env:
-      AZURE_RESOURCE_GROUP: cd-with-actions
-      AZURE_APP_PLAN: actions-ttt-deployment
-      AZURE_LOCATION: '"Central US"'
+      DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt # Must not exist as a package associated with a different repo!
+      IMAGE_REGISTRY_URL: docker.pkg.github.com
       #################################################
       ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
       #################################################
@@ -42,9 +41,8 @@ on:
       - main
 
 env:
-  AZURE_RESOURCE_GROUP: cd-with-actions
-  AZURE_APP_PLAN: actions-ttt-deployment
-  AZURE_LOCATION: '"Central US"'
+  DOCKER_IMAGE_NAME: {{user.login}}-azure-ttt # Must not exist as a package associated with a different repo!
+  IMAGE_REGISTRY_URL: docker.pkg.github.com
   #################################################
   ### USER PROVIDED VALUES ARE REQUIRED BELOW   ###
   #################################################
